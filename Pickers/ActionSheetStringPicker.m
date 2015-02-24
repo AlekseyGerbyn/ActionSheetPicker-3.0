@@ -152,7 +152,16 @@
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
-    return [self.dataSource pickerView:pickerView viewForRow:row forComponent:component reusingView:view];
+    if (self.dataSource) {
+        return [self.dataSource pickerView:pickerView viewForRow:row forComponent:component reusingView:view];
+    }
+    
+    UILabel *defaultLabel = [UILabel new];
+    defaultLabel.text = [self pickerView:pickerView titleForRow:row forComponent:component];
+    defaultLabel.font = [UIFont systemFontOfSize:18.0f];
+    [defaultLabel sizeToFit];
+    
+    return defaultLabel;
 }
 
 @end
