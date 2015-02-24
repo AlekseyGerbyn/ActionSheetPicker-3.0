@@ -27,6 +27,12 @@
 
 #import "AbstractActionSheetPicker.h"
 
+@protocol ActionSheetStringPickerDataSource <NSObject>
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view;
+
+@end
+
 @class ActionSheetStringPicker;
 typedef void(^ActionStringDoneBlock)(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue);
 typedef void(^ActionStringCancelBlock)(ActionSheetStringPicker *picker);
@@ -56,7 +62,9 @@ typedef void(^ActionStringCancelBlock)(ActionSheetStringPicker *picker);
 
 - (instancetype)initWithTitle:(NSString *)title rows:(NSArray *)strings initialSelection:(NSInteger)index doneBlock:(ActionStringDoneBlock)doneBlock cancelBlock:(ActionStringCancelBlock)cancelBlockOrNil origin:(id)origin;
 
+@property (nonatomic, weak) id <ActionSheetStringPickerDataSource> dataSource;
 @property (nonatomic, copy) ActionStringDoneBlock onActionSheetDone;
 @property (nonatomic, copy) ActionStringCancelBlock onActionSheetCancel;
 
 @end
+

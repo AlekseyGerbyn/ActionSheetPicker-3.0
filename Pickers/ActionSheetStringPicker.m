@@ -151,4 +151,8 @@
     return pickerView.frame.size.width - 30;
 }
 
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    return [self.dataSource pickerView:pickerView viewForRow:row forComponent:component reusingView:view];
+}
+
 @end
